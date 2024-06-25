@@ -2,169 +2,160 @@ type: custom:layout-card
 layout_type: custom:grid-layout
 cards:
   - type: custom:sunsynk-power-flow-card
-    cardstyle: compact
+    cardstyle: full
     large_font: true
     show_solar: true
-    panel_mode: true
-    card_height: 415px
+    panel_mode: false
+    dynamic_line_width: true
+    decimal_places_energy: 2
+    decimal_places: 2
     inverter:
+      model: deye
       modern: true
-      colour: '#959595'
-      autarky: power
+      auto_scale: true
+      autarky: energy
+      colour:
+        - 215
+        - 208
+        - 208
     solar:
       mppts: 2
       show_daily: true
       colour: '#F4C430'
       animation_speed: 9
-      max_power: 6600
-      pv1_name: West
-      pv2_name: North
+      max_power: 9200
+      pv1_name: NWN-1
+      pv2_name: NWN-2
+      pv2_max_power: 4600
+      pv1_max_power: 4600
       display_mode: 2
       auto_scale: true
-      pv2_max_power: 3850
-      pv1_max_power: 2750
-      efficiency: 3
     battery:
-      energy: 15960
+      energy: 10320
       shutdown_soc: sensor.sunsynk_battery_capacity_shutdown
       show_daily: true
-      colour: pink
-      animation_speed: 6
-      max_power: 4100
       auto_scale: true
-      show_absolute: true
+      show_remaining_energy: true
+      dynamic_colour: true
+      invert_power: false
+      hide_soc: false
+      linear_gradient: true
       animate: true
-      path_threshold: 90
+      max_power: 8800
+      colour:
+        - 217
+        - 144
+        - 18
+      charge_colour:
+        - 70
+        - 227
+        - 13
     load:
       show_aux: false
       show_daily: true
       animation_speed: 8
       max_power: 8000
-      load1_name: Geyser
-      load1_icon: sensor.template_mdi
-      load3_name: Pool
-      load3_icon: mdi:pool
+      additional_loads: 0
       auto_scale: true
-      path_threshold: 90
-      additional_loads: 3
-      load2_name: Dishwasher
-      load2_icon: mdi:dishwasher
-      off_threshold: 3
     grid:
       show_daily_buy: true
-      no_grid_colour: green
+      no_grid_colour: '#c7c7f7'
       animation_speed: 8
       max_power: 8000
       auto_scale: true
-      grid_off_colour:
-        - 122
-        - 0
-        - 0
-      grid_name: ''
+      export_colour: maroon
+      show_nonessential: false
+      invert_grid: true
     entities:
       use_timer_248: switch.sunsynk_toggle_system_timer
       priority_load_243: switch.sunsynk_toggle_priority_load
+      load_frequency_192: sensor.sunsynk_load_frequency
+      inverter_current_164: sensor.sunsynk_deye8k_current
+      grid_connected_status_194: binary_sensor.sunsynk_grid_connected_status_2
+      inverter_status_59: sensor.sunsynk_overall_state
       day_battery_charge_70: sensor.sunsynk_day_battery_charge
       day_battery_discharge_71: sensor.sunsynk_day_battery_discharge
-      day_load_energy_84: sensor.sunsynk_day_load_energy
-      day_grid_import_76: sensor.sunsynk_day_grid_import
-      day_grid_export_77: none
-      day_pv_energy_108: sensor.sunsynk_day_pv_energy
-      inverter_voltage_154: sensor.sunsynk_inverter_voltage
-      load_frequency_192: sensor.sunsynk_load_frequency
-      inverter_current_164: sensor.sunsynk_inverter_current
-      inverter_power_175: sensor.sunsynk_inverter_power
-      grid_power_169: sensor.sunsynk_grid_power
-      pv1_power_186: sensor.sunsynk_pv1_power
-      pv2_power_187: sensor.sunsynk_pv2_power
-      pv3_power_188: none
-      pv4_power_189: none
       battery_voltage_183: sensor.sunsynk_battery_voltage
       battery_soc_184: sensor.sunsynk_battery_soc
       battery_power_190: sensor.sunsynk_battery_power
       battery_current_191: sensor.sunsynk_battery_current
-      essential_power: sensor.sunsynk_essential_power_1
-      essential_load1: sensor.tuya_geyser_current_consumption
-      essential_load3: sensor.sonoff_10013bda3a_power
-      nonessential_power: sensor.sunsynk_nonessential_power_1
+      grid_power_169: sensor.sunsynk_grid_power
+      day_grid_import_76: sensor.sunsynk_day_grid_import
+      day_grid_export_77: sensor.sunsynk_day_grid_export
       grid_ct_power_172: sensor.sunsynk_grid_ct_power
+      day_load_energy_84: sensor.sunsynk_day_load_energy
+      aux_power_166: sensor.sunsynk_aux_power
+      day_pv_energy_108: sensor.sunsynk_day_pv_energy
+      pv1_power_186: sensor.sunsynk_pv1_power
+      pv2_power_187: sensor.sunsynk_pv2_power
       pv1_voltage_109: sensor.sunsynk_pv1_voltage
       pv1_current_110: sensor.sunsynk_pv1_current
       pv2_voltage_111: sensor.sunsynk_pv2_voltage
       pv2_current_112: sensor.sunsynk_pv2_current
-      grid_connected_status_194: binary_sensor.sunsynk_grid_connected_status
-      inverter_status_59: sensor.sunsynk_overall_state
-      aux_power_166: sensor.sunsynk_aux_power
-      remaining_solar: sensor.solcast_pv_forecast_forecast_remaining_today
-      battery_temp_182: sensor.sunsynk_battery_temperature
+      environment_temp: sensor.meteobridge_air_temperature
+      grid_voltage: sensor.sunsynk_grid_voltage
       radiator_temp_91: sensor.sunsynk_radiator_temperature
       dc_transformer_temp_90: sensor.sunsynk_dc_transformer_temperature
-      prog1_time: sensor.sunsynk_time_slot_1
+      inverter_voltage_154: sensor.sunsynk_grid_voltage
+      inverter_power_175: sensor.sunsynk_deye8k_power
+      battery_temp_182: sensor.sunsynk_battery_temperature
+      essential_power: sensor.sunsynk_essential_power
+      prog1_time: input_text.sunsynk_time_slot_1
       prog1_capacity: number.sunsynk_prog1_capacity
       prog1_charge: switch.sunsynk_prog1_grid_charge
-      prog2_time: sensor.sunsynk_time_slot_2
+      prog2_time: input_text.sunsynk_time_slot_2
       prog2_capacity: number.sunsynk_prog2_capacity
       prog2_charge: switch.sunsynk_prog2_grid_charge
-      prog3_time: sensor.sunsynk_time_slot_3
+      prog3_time: input_text.sunsynk_time_slot_3
       prog3_capacity: number.sunsynk_prog3_capacity
       prog3_charge: switch.sunsynk_prog3_grid_charge
-      prog4_time: sensor.sunsynk_time_slot_4
+      prog4_time: input_text.sunsynk_time_slot_4
       prog4_capacity: number.sunsynk_prog4_capacity
       prog4_charge: switch.sunsynk_prog4_grid_charge
-      prog5_time: sensor.sunsynk_time_slot_5
+      prog5_time: input_text.sunsynk_time_slot_5
       prog5_capacity: number.sunsynk_prog5_capacity
       prog5_charge: switch.sunsynk_prog5_grid_charge
-      prog6_time: sensor.sunsynk_time_slot_6
+      prog6_time: input_text.sunsynk_time_slot_6
       prog6_capacity: number.sunsynk_prog6_capacity
       prog6_charge: switch.sunsynk_prog6_grid_charge
-      essential_load1_extra: sensor.daily_geyser_energy
-      essential_load3_extra: sensor.pool_temperature
-      environment_temp: sensor.home_realfeel_temperature
-      prepaid_units: sensor.prepaid_units_left
-      essential_load2: sensor.sonoff_pow_r2_energy_power
-      essential_load2_extra: sensor.sonoff_pow_r2_energy_today
-    dynamic_line_width: true
+      battery_rated_capacity: input_number.battery_size
+      remaining_solar: sensor.energy_production_today_remaining
+    title_size: ' '
+    card_height: '500'
+    show_battery: true
     view_layout:
-      grid-area: flow
+      grid-area: espfc
   - type: custom:plotly-graph
     view_layout:
       grid-area: graph
     entities:
-      - entity: sensor.sunsynk_solar_power
+      - entity: sensor.sunsynk_grid_power
         name: |
           $fn ({ ys,meta }) =>
-            "Solar" + "🔆" + "(" +ys[ys.length - 1]+"W)"
-        fill: tozeroy
+            "Grid" + "💡" + "(" +ys[ys.length - 1]+"W)"
         line:
-          color: rgb(255, 155, 48)
+          color: rgb(255, 64, 0)
           shape: spline
       - entity: sensor.sunsynk_essential_power
         name: |
           $fn ({ ys,meta }) =>
             "Load" + "⚡" + "(" +ys[ys.length - 1]+"W)"
-        fill: tozeroy
-        line:
-          color: rgb(95, 182, 173)
-          shape: spline
-      - entity: sensor.sunsynk_grid_ct_power
-        name: |
-          $fn ({ ys,meta }) =>
-            "Grid" + "💡" + "(" +ys[ys.length - 1]+"W)"
-        fill: tozeroy
         line:
           color: rgb(84, 144, 194)
           shape: spline
-        filters:
-          - sliding_window_moving_average:
-              window_size: 1
-              extended: true
       - entity: sensor.sunsynk_battery_power
-        fill: tozeroy
         name: |
           $fn ({ ys,meta }) =>
             "Battery" + "🔋" + "(" +ys[ys.length - 1]+"W)"
         line:
-          color: rgb(243, 179, 202)
+          color: green
+          shape: spline
+      - entity: sensor.sunsynk_solar_power
+        name: |
+          $fn ({ ys,meta }) =>
+            "Solar" + "🔆" + "(" +ys[ys.length - 1]+"W)"
+        line:
+          color: rgb(255, 155, 48)
           shape: spline
       - entity: sensor.sunsynk_battery_soc
         name: |
@@ -176,16 +167,17 @@ cards:
           width: 1
           shape: spline
         fill: none
-        filters:
-          - sliding_window_moving_average:
-              window_size: 1
-              extended: true
     hours_to_show: 24
     refresh_interval: 60
     title: null
     defaults:
       entity:
+        fill: tozeroy
         show_value: false
+        filters:
+          - sliding_window_moving_average:
+              window_size: 1
+              extended: true
       yaxes:
         fixedrange: true
     layout:
@@ -196,7 +188,7 @@ cards:
           size: 11
       yaxis2:
         range:
-          - 20
+          - 5
           - 105
         fixedrange: true
       yaxis:
@@ -209,15 +201,9 @@ cards:
       grid-area: daily
     entities:
       - entity: sensor.sunsynk_day_pv_energy_local
-        statistic: state
         name: |
           $fn ({ ys,meta }) =>
             "Solar" + "🔆" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        texttemplate: '%{y}'
-        filters:
-          - filter: i>0
         marker:
           color: rgb(255, 155, 48)
       - entity: sensor.sunsynk_day_load_energy_local
@@ -225,23 +211,13 @@ cards:
         name: |
           $fn ({ ys,meta }) =>
             "Load" + "⚡" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        filters:
-          - filter: i>0
-        texttemplate: '%{y}'
         marker:
           color: rgb(95, 182, 173)
-      - entity: sensor.sunsynk_day_grid_import_energy_local
+      - entity: sensor.sunsynk_day_grid_import
         statistic: state
         name: |
           $fn ({ ys,meta }) =>
             "Grid Import" + "💡" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        texttemplate: '%{y}'
-        filters:
-          - filter: i>0
         marker:
           color: rgb(84, 144, 194)
       - entity: sensor.sunsynk_day_battery_discharge_energy_local
@@ -249,11 +225,6 @@ cards:
         name: |
           $fn ({ ys,meta }) =>
             "Battery Discharge" + "🖱️" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        texttemplate: '%{y}'
-        filters:
-          - filter: i>0
         marker:
           color: rgb(151, 90, 182)
       - entity: sensor.sunsynk_day_battery_charge_energy_local
@@ -261,20 +232,32 @@ cards:
         name: |
           $fn ({ ys,meta }) =>
             "Battery Charge" + "🔋" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        texttemplate: '%{y}'
-        filters:
-          - filter: i>0
         marker:
           color: yellow
     hours_to_show: 5d
     title: null
     refresh_interval: 120
     defaults:
+      entity:
+        statistic: state
+        period: day
+        type: bar
+        texttemplate: '%{y}'
+        filters:
+          - filter: i>0
       yaxes:
         fixedrange: true
     layout:
+      xaxis:
+        rangeselector:
+          'y': 1.05
+          buttons:
+            - count: 7
+              step: day
+            - count: 31
+              step: day
+            - count: 90
+              step: day
       legend:
         bgcolor: rgba(0,0,0,0)
         itemsizing: constant
@@ -284,7 +267,6 @@ cards:
     config:
       displayModeBar: false
       scrollZoom: false
-    time_offset: 12h
   - type: custom:plotly-graph
     view_layout:
       grid-area: solar
@@ -300,7 +282,7 @@ cards:
           width: 1
         fill: tozeroy
         fillcolor: rgba(255, 155, 48, 0.3)
-        yaxis: y3
+        yaxis: y1
         show_value: false
         showlegend: false
       - entity: sensor.energy_production_today_sum
@@ -371,7 +353,7 @@ cards:
           - 1
     defaults:
       yaxes:
-        fixedrange: true
+        fixedrange: false
     layout:
       height: 410
       margin:
@@ -383,14 +365,14 @@ cards:
         'y': -0.8
       yaxis2:
         range:
-          - 20
+          - 5
           - 105
         fixedrange: true
       annotations:
         - text: |-
             $fn ({hass}) =>
               "<span style='font-size: 24px;'><span style='color: orange'>"
-              + Number(hass.states['sensor.energy_production_tomorrow_sum'].state).toFixed(1) + "</span></span>kWh<br>"
+              + Number(hass.states['sensor.energy_production_today'].state).toFixed(1) + "</span></span>kWh<br>"
               +  "</span><span style=''>Forecast Today</span><br>"
           xref: x domain
           yref: y domain
@@ -402,7 +384,7 @@ cards:
         - text: |-
             $fn ({hass}) =>
               "<span style='font-size: 24px;'><span style='color: dodgerblue'>"
-              + Number(hass.states['sensor.meteo_energy_production_today_remaining'].state).toFixed(1) + "</span></span>kWh<br>"
+              + Number(hass.states['sensor.energy_production_today_remaining'].state).toFixed(1) + "</span></span>kWh<br>"
               +  "</span><span style=''>Remaining</span><br>"
           xref: x domain
           yref: y domain
@@ -414,7 +396,7 @@ cards:
         - text: |-
             $fn ({hass}) =>
               "<span style='font-size: 24px;'><span style='color: '>"
-              + Number(hass.states['sensor.energy_production_tomorrow_sum'].state).toFixed(1) + "</span></span>kWh<br>"
+              + Number(hass.states['sensor.energy_production_tomorrow'].state).toFixed(1) + "</span></span>kWh<br>"
               +  "</span><span style=''>Forecast Tomorrow</span><br>"
           xref: x domain
           yref: y domain
@@ -426,7 +408,7 @@ cards:
         - text: |-
             $fn ({hass}) =>
               "<span style='font-size: 24px;'><span style='color: white'>"
-              + Number(hass.states['sensor.energy_production_d2_sum'].state).toFixed(1) + "</span></span>kWh<br>"
+              + Number(hass.states['sensor.energy_production_d2'].state).toFixed(1) + "</span></span>kWh<br>"
               +  "</span><span style=''>Forecast Day 2</span><br>"
           xref: x domain
           yref: y domain
@@ -454,89 +436,55 @@ cards:
       grid-area: total
     entities:
       - entity: sensor.sunsynk_total_pv_energy
-        statistic: state
         name: |
           $fn ({ ys,meta }) =>
             "Solar" + "🔆" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        width: $fn() => 1000*60*60*3
         offset: $fn() => 1000*60*60*4.5
-        texttemplate: '%{y}'
-        filters:
-          - force_numeric
         marker:
           color: rgb(255, 155, 48)
       - entity: sensor.sunsynk_total_load_energy
-        statistic: state
         name: |
           $fn ({ ys,meta }) =>
             "Load" + "⚡" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        width: $fn() => 1000*60*60*3
         offset: $fn() => 1000*60*60*7.5
-        filters:
-          - force_numeric
-        texttemplate: '%{y}'
         marker:
           color: rgb(95, 182, 173)
       - entity: sensor.sunsynk_total_grid_import
-        statistic: state
         name: |
           $fn ({ ys,meta }) =>
             "Grid Import" + "💡" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        width: $fn() => 1000*60*60*3
         offset: $fn() => 1000*60*60*10.5
-        texttemplate: '%{y}'
-        filters:
-          - force_numeric
         marker:
           color: rgb(84, 144, 194)
       - entity: sensor.sunsynk_total_battery_discharge
-        statistic: state
         name: |
           $fn ({ ys,meta }) =>
             "Bat Discharge" + "🖱️" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        width: $fn() => 1000*60*60*3
         offset: $fn() => 1000*60*60*13.5
-        texttemplate: '%{y}'
-        filters:
-          - force_numeric
         marker:
           color: rgb(151, 90, 182)
       - entity: sensor.sunsynk_total_battery_charge
-        statistic: state
         name: |
           $fn ({ ys,meta }) =>
             "Bat Charge" + "🔋" + "(" +ys[ys.length - 1]+"kWh)"
-        period: day
-        type: bar
-        width: $fn() => 1000*60*60*3
         offset: $fn() => 1000*60*60*16.5
-        texttemplate: '%{y}'
-        filters:
-          - force_numeric
         marker:
           color: yellow
     hours_to_show: current_day
     defaults:
       entity:
-        line:
-          width: 2
+        statistic: state
+        period: day
+        type: bar
+        width: $fn() => 1000*60*60*3
+        texttemplate: '%{y}'
       yaxes:
         fixedrange: true
     title: null
     layout:
-      barmode: group
       xaxis:
         nticks: 1
       height: 410
-    time_offset: '-1m'
     config:
       displayModeBar: false
       scrollZoom: false
@@ -601,7 +549,7 @@ cards:
         values: >-
           $ex [
           hass.states["sensor.sunsynk_day_battery_discharge_energy_local"].state,
-          hass.states["sensor.sunsynk_day_grid_import_energy_local"].state,
+          hass.states["sensor.sunsynk_day_grid_import"].state,
           hass.states["sensor.sunsynk_day_pv_energy_local"].state ]
         labels:
           - Battery Charge
@@ -648,7 +596,7 @@ cards:
         - text: |-
             $fn ({hass}) =>
               "<span style='font-size: 24px;'><span style='color: rgb(84, 144, 194)'>"
-              + Number(hass.states['sensor.sunsynk_day_grid_import_energy_local'].state).toFixed(1) + "</span></span>kWh<br>"
+              + Number(hass.states['sensor.sunsynk_day_grid_import'].state).toFixed(1) + "</span></span>kWh<br>"
               +  "</span><span style=''>Grid</span><br>"
           xref: paper
           yref: paper
@@ -657,97 +605,6 @@ cards:
           x: 0.9
           'y': 1.2
           showarrow: false
-  - type: vertical-stack
-    cards:
-      - type: custom:plotly-graph
-        entities:
-          - entity: sensor.sonoff_10013bda3a_energy
-            statistic: state
-            name: Daily Energy
-            period: day
-            type: bar
-            texttemplate: '%{y}'
-            filters:
-              - filter: i>0
-        hours_to_show: 7d
-        defaults:
-          entity:
-            line:
-              width: 2
-          yaxes:
-            fixedrange: true
-        title: Daily Pool Energy
-        layout:
-          xaxis:
-            rangeselector:
-              'y': 1.05
-              buttons:
-                - count: 7
-                  step: day
-                - count: 30
-                  step: day
-                - count: 90
-                  step: day
-        config:
-          displayModeBar: false
-          scrollZoom: false
-      - type: entities
-        entities:
-          - entity: switch.sonoff_10013bda3a
-            name: Pool pump
-          - entity: sensor.sonoff_10013bda3a_current
-            icon: mdi:current-ac
-            name: Current
-          - entity: sensor.sonoff_10013bda3a_power
-            icon: mdi:lightning-bolt
-            name: Power
-    view_layout:
-      grid-area: bat
-  - type: vertical-stack
-    cards:
-      - type: custom:plotly-graph
-        entities:
-          - entity: sensor.daily_geyser_energy
-            statistic: state
-            name: Daily Energy
-            period: day
-            type: bar
-            texttemplate: '%{y}'
-            filters:
-              - filter: i>0
-        hours_to_show: 7d
-        defaults:
-          entity:
-            line:
-              width: 2
-          yaxes:
-            fixedrange: true
-        title: Daily Geyser Energy
-        layout:
-          xaxis:
-            rangeselector:
-              'y': 1.05
-              buttons:
-                - count: 7
-                  step: day
-                - count: 30
-                  step: day
-                - count: 90
-                  step: day
-        config:
-          displayModeBar: false
-          scrollZoom: false
-      - type: entities
-        entities:
-          - entity: switch.geyser
-          - entity: sensor.tuya_geyser_current
-            icon: mdi:current-ac
-            name: Current
-          - entity: sensor.tuya_geyser_current_consumption
-            icon: mdi:lightning-bolt
-            name: Power
-    view_layout:
-      grid-area: geyser
   - type: markdown
     content: "  ## System Timer Settings\n<table width=\"100%\"  border=0>\n  <tbody> \n  <tr>\n    <td align=\"left\">\n    <b>Time Slot</b>\n    </td>\n    <td align=\"left\">\n    <b>Battery SOC</b>\n    </td>\n    <td align=\"left\">\n\t<b>Grid</b>\n\t</td>\n  </tr>\n  <tr>\n    <td align=\"left\">\n    {{states('sensor.sunsynk_time_slot_1')}} - {{states('sensor.sunsynk_time_slot_2')}}\n    </td>\n    <td align=\"left\">\n    {{ states('number.sunsynk_prog1_capacity') | round(0) }} %\n    </td>\n    <td align=\"left\">\n\t{% if is_state('switch.sunsynk_prog1_grid_charge', 'on') %} <ha-icon icon=\"mdi:checkbox-marked-outline\"></ha-icon> {% else %} <ha-icon icon=\"mdi:checkbox-blank-outline\"></ha-icon> {% endif %}\n\t</td>\n  </tr>\n  <tr>\n    <td align=\"left\">\n    {{states('sensor.sunsynk_time_slot_2')}} - {{states('sensor.sunsynk_time_slot_3')}}\n    </td>\n    <td align=\"left\">\n    {{ states('number.sunsynk_prog2_capacity') | round(0) }} %\n    </td>\n    <td align=\"left\">\n\t{% if is_state('switch.sunsynk_prog2_grid_charge', 'on') %} <ha-icon icon=\"mdi:checkbox-marked-outline\"></ha-icon> {% else %} <ha-icon icon=\"mdi:checkbox-blank-outline\"></ha-icon> {% endif %}\n\t</td>\n  </tr>\n  <tr>\n    <td align=\"left\">\n    {{states('sensor.sunsynk_time_slot_3')}} - {{states('sensor.sunsynk_time_slot_4')}}\n    </td>\n    <td align=\"left\">\n    {{ states('number.sunsynk_prog3_capacity') | round(0) }} %\n    </td>\n    <td align=\"left\">\n\t{% if is_state('switch.sunsynk_prog3_grid_charge', 'on') %} <ha-icon icon=\"mdi:checkbox-marked-outline\"></ha-icon> {% else %} <ha-icon icon=\"mdi:checkbox-blank-outline\"></ha-icon> {% endif %}\n\t</td>\n  </tr>\n  <tr>\n    <td align=\"left\">\n    {{states('sensor.sunsynk_time_slot_4')}} - {{states('sensor.sunsynk_time_slot_5')}}\n    </td>\n    <td align=\"left\">\n    {{ states('number.sunsynk_prog4_capacity') | round(0) }} %\n    </td>\n    <td align=\"left\">\n\t{% if is_state('switch.sunsynk_prog4_grid_charge', 'on') %} <ha-icon icon=\"mdi:checkbox-marked-outline\"></ha-icon> {% else %} <ha-icon icon=\"mdi:checkbox-blank-outline\"></ha-icon> {% endif %}\n\t</td>\n  </tr>\n  <tr>\n    <td align=\"left\">\n    {{states('sensor.sunsynk_time_slot_5')}} - {{states('sensor.sunsynk_time_slot_6')}}\n    </td>\n    <td align=\"left\">\n    {{ states('number.sunsynk_prog5_capacity') | round(0) }} %\n    </td>\n    <td align=\"left\">\n\t{% if is_state('switch.sunsynk_prog5_grid_charge', 'on') %} <ha-icon icon=\"mdi:checkbox-marked-outline\"></ha-icon> {% else %} <ha-icon icon=\"mdi:checkbox-blank-outline\"></ha-icon> {% endif %}\n\t</td>\n  </tr>\n  <tr>\n    <td align=\"left\">\n    {{states('sensor.sunsynk_time_slot_6')}} - {{states('sensor.sunsynk_time_slot_1')}}\n    </td>\n    <td align=\"left\">\n    {{ states('number.sunsynk_prog6_capacity') | round(0) }} %\n    </td>\n    <td align=\"left\">\n\t{% if is_state('switch.sunsynk_prog6_grid_charge', 'on') %} <ha-icon icon=\"mdi:checkbox-marked-outline\"></ha-icon> {% else %} <ha-icon icon=\"mdi:checkbox-blank-outline\"></ha-icon> {% endif %}\n\t</td>\n  </tr>\n  </tbody>\n</table>"
     view_layout:
@@ -759,7 +616,7 @@ cards:
       - entity: sensor.sunsynk_essential_power_1
         unit: W
         name: AC
-      - entity: sensor.sunsynk_inverter_voltage
+      - entity: sensor.sunsynk_deye8k_voltage
         decimals: 0
         unit: V
       - entity: sensor.sunsynk_grid_frequency
@@ -882,11 +739,11 @@ cards:
             - text-anchor: middle;
     horseshoe_scale:
       min: 0
-      max: 8000
+      max: 11500
       width: 6
     color_stops:
-      '0': '#5fb6ad'
-      '2000': '#5fb6ad'
+      '0': rgb(255, 64, 0)
+      '2000': rgb(255, 64, 0)
     card_mod:
       style: |
         ha-card {
@@ -925,7 +782,7 @@ cards:
         decimals: 2
         unit: kWh
         name: Daily
-      - entity: sensor.solcast_pv_forecast_forecast_remaining_today
+      - entity: sensor.energy_production_today_remaining
         decimals: 2
         unit: kWh
         name: Left Today
@@ -1060,7 +917,7 @@ cards:
             - text-anchor: start;
     horseshoe_scale:
       min: 0
-      max: 7000
+      max: 9200
       width: 6
     color_stops:
       '0': orange
@@ -1095,8 +952,8 @@ cards:
           const ys = [];
 
           timeSlots.forEach(({start, end, cap}) => {
-            const startTimeString = hass.states[`sensor.ss_prog${start}_time`].state;
-            const endTimeString = hass.states[`sensor.ss_prog${end}_time`].state;
+            const startTimeString = hass.states[`input_text.sunsynk_time_slot_${start}`].state;
+            const endTimeString = hass.states[`input_text.sunsynk_time_slot_${end}`].state;
             const capacity = parseFloat(hass.states[`number.sunsynk_prog${cap}_capacity`].state);
 
             const [startHours, startMinutes] = startTimeString.split(':').map(Number);
@@ -1141,7 +998,7 @@ cards:
         yaxis: y2
         show_value: false
         showlegend: true
-      - entity: sensor.sunsynk_grid_ct_power
+      - entity: sensor.sunsynk_grid_power
         name: |
           $fn ({ ys,meta }) =>
             "Grid" + "💡" + "(" +ys[ys.length - 1]+"W)"
@@ -1171,7 +1028,7 @@ cards:
       yaxis2:
         range:
           - 0
-          - 6600
+          - 8800
         fixedrange: true
       xaxis:
         nticks: 9
@@ -1302,8 +1159,8 @@ cards:
       max: 100
       width: 6
     color_stops:
-      '0': pink
-      '2000': pink
+      '0': green
+      '2000': green
     card_mod:
       style: |
         ha-card {
@@ -1326,7 +1183,7 @@ cards:
           - filter: i>0
         marker:
           color: rgb(255, 155, 48)
-      - entity: sensor.sunsynk_day_grid_import_energy_local
+      - entity: sensor.sunsynk_day_grid_import
         statistic: state
         name: |
           $fn ({ ys,meta }) =>
@@ -1354,6 +1211,8 @@ cards:
     title: null
     refresh_interval: 600
     defaults:
+      entity:
+        period: day
       yaxes:
         fixedrange: true
     layout:
@@ -1471,10 +1330,9 @@ cards:
   - type: markdown
     content: >-
       {% set stage_sensor = "sensor.load_shedding_stage_eskom" %} {% set
-      area_sensor =
-      "sensor.load_shedding_area_jhbcitypower3_5_noordhangext49505154586778" %}
-      {% set area_schedule = state_attr(area_sensor, "forecast") %} {% if
-      area_schedule %}
+      area_sensor = "sensor.load_shedding_area_capetown_6_durbanville" %} {% set
+      area_schedule = state_attr(area_sensor, "forecast") %} {% if area_schedule
+      %}
         {% set start_time = area_schedule[0].start_time %}
         {% set end_time = area_schedule[0].end_time %}
         {% if is_state(area_sensor, "off") %}
@@ -1556,7 +1414,7 @@ layout:
   grid-template-rows: auto 2fr auto auto auto auto auto
   grid-template-areas: |
     "g1 g1 g2 g2 g3 g3 ls ls weather weather"
-    "flow flow flow flow graph graph graph graph graph graph "
+    "espfc espfc espfc espfc graph graph graph graph graph graph "
     "total total total total daily daily daily daily daily daily"
     "sg sg sg sg sg sg sg sg stats stats"
     "m m m m m m m m stats1 stats1 "
@@ -1571,7 +1429,7 @@ layout:
         "g1"
         "g2"
         "g3"
-        "flow"
+        "espfc"
         "graph"
         "daily"
         "total"
@@ -1589,7 +1447,7 @@ layout:
       grid-template-rows: auto
       grid-template-areas: |
         "g1 g2 g3"
-        "flow flow flow "
+        "espfc espfc espfc "
         "graph graph graph"
         "stats1 daily daily"
         "stats total total"
